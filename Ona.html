@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ona — Café de especialidad · Buenos Aires</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2C1F14;
+  --ink-2:#3D2D1F;
+  --bone:#F5F0E8;
+  --bone-2:#ECE5D8;
+  --brick:#2C1F14;
+  --brick-deep:#1a120a;
+  --gold:#2C1F14;
+  --line-ink:rgba(44,31,20,0.18);
+  --display:'Plus Jakarta Sans', system-ui, sans-serif;
+  --sans:'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono:'Plus Jakarta Sans', system-ui, sans-serif;
+}
+* { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-weight:400;
+  background:var(--bone);
+  color:var(--ink);
+  font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
+
+/* common utilities */
+.mono-tag{
+  font-size:11px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+}
+.display{
+  font-weight:800;
+  letter-spacing:-0.06em;
+  line-height:0.88;
+  text-transform:uppercase;}
+.display-cond{
+  font-weight:800;
+  letter-spacing:-0.06em;
+  line-height:0.82;
+  text-transform:uppercase;}
+
+/* ============ NAV (double-bar) ============ */
+.nav{
+  position:sticky;top:0;left:0;right:0;z-index:100;
+  width:100%;
+}
+.nav-top{
+  background:var(--bone);
+  height:84px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 28px;
+  border-bottom:1px solid var(--line-ink);
+}
+.nav-bottom{
+  background:var(--ink);
+  height:44px;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 28px;
+  position:relative;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.logo img{
+  display:block;
+  max-width:140px;
+  max-height:60px;
+  width:auto;
+  height:auto;
+}
+.nav-links{
+  display:flex;align-items:center;gap:36px;
+  list-style:none;
+  margin:0;padding:0;
+}
+.nav-links a{
+  font-size:11px;
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  font-weight:400;
+  color:var(--bone);
+}
+.nav-order{
+  position:absolute;
+  right:28px;top:50%;
+  transform:translateY(-50%);
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;
+  color:var(--bone);
+  padding:6px 14px;
+  border:1.5px solid var(--bone);
+  background:transparent;
+}
+.menu-toggle{display:none}
+
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 18px 12px 20px;
+  font-size:11px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  font-weight:600;
+  background:transparent;
+  color:inherit;
+  border-radius:0;
+  border:1.5px solid currentColor;
+  cursor:pointer;
+}
+.btn-brick{background:var(--ink);border-color:var(--ink);color:var(--bone)}
+.btn-bone{background:var(--bone);border-color:var(--bone);color:var(--ink)}
+
+/* ============ HERO (split 50/50) ============ */
+.hero{
+  position:relative;
+  height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  overflow:hidden;
+  isolation:isolate;
+}
+.hero-left{
+  background:var(--bone);
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding:96px 80px;
+}
+.hero-left h2{
+  font-weight:800;
+  font-size:72px;
+  line-height:0.96;
+  letter-spacing:-0.06em;
+  color:var(--ink);
+  max-width:14ch;
+  margin-bottom:28px;
+  text-transform:uppercase;}
+.hero-left h2 em{
+  font-style:normal;
+  font-weight:600;
+  color:var(--gold);
+}
+.hero-left p{
+  font-size:17px;
+  line-height:1.5;
+  color:var(--ink);
+  max-width:46ch;
+  margin-bottom:36px;
+}
+.hero-cta-row{display:flex;gap:10px;flex-wrap:wrap}
+.hero-right{
+  position:relative;
+  height:100%;
+  overflow:hidden;
+}
+.hero-right img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* Ribbon divider */
+.ribbon{
+  background:var(--ink);
+  color:var(--bone);
+  padding:20px 0;
+  overflow:hidden;
+  position:relative;
+  border-top:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+}
+.ribbon-track{
+  display:flex;gap:48px;
+  white-space:nowrap;
+  animation:ribbonMove 30s linear infinite;
+  font-weight:800;
+  font-size:36px;
+  line-height:1;
+  letter-spacing:-0.06em;
+  text-transform:uppercase;
+}
+.ribbon-track span{display:inline-flex;align-items:center;gap:48px}
+.ribbon-track .star{
+  color:var(--bone);
+  font-size:14px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  opacity:0.7;
+}
+@keyframes ribbonMove{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* ============ NOSOTROS ============ */
+.nosotros{
+  background:var(--bone);
+  padding:0;
+  position:relative;
+}
+.nosotros-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:stretch;
+  min-height:640px;
+}
+.nosotros-photo{
+  background:#E8E3D8;
+  overflow:hidden;
+}
+.nosotros-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter:grayscale(0.05) contrast(1.02);
+}
+.nosotros-text{
+  padding:120px 60px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.nosotros-text .menu-section-num{margin-bottom:24px}
+.nosotros-text h2{
+  font-weight:800;
+  font-size:clamp(36px,5vw,56px);
+  line-height:0.96;
+  letter-spacing:-0.06em;
+  color:var(--ink);
+  margin:0 0 32px;
+  text-transform:uppercase;
+}
+.nosotros-text p{
+  font-size:17px;
+  line-height:1.6;
+  color:var(--ink-2);
+  max-width:48ch;
+  margin:0 0 18px;
+}
+.nosotros-text p:last-child{margin-bottom:0}
+
+/* ============ MENU SECTION ============ */
+.menu{
+  background:var(--bone);
+  padding:120px 60px;
+  position:relative;
+}
+.menu-head{
+  margin-bottom:60px;
+  max-width:760px;
+}
+.menu-head h2{
+  font-weight:800;
+  font-size:clamp(36px,5vw,56px);
+  line-height:0.96;
+  letter-spacing:-0.06em;
+  color:var(--ink);
+  margin-bottom:14px;
+  text-transform:uppercase;}
+.menu-head p{
+  font-size:17px;
+  line-height:1.5;
+  color:var(--ink-2);
+  max-width:54ch;
+}
+
+.menu-section-num{
+  display:inline-flex;align-items:center;gap:12px;font-size:11px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:24px;
+  font-weight:600;
+}
+.menu-section-num::before{
+  content:"";width:32px;height:2px;background:var(--gold);
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+}
+.product-card{
+  background:var(--bone);
+  border:1px solid #E8E3D8;
+  display:flex;
+  flex-direction:column;
+  padding:18px;
+}
+.product-card .img{
+  aspect-ratio:1/1;
+  width:100%;
+  background-size:cover;
+  background-position:center;
+  margin-bottom:20px;
+}
+.product-card .name{
+  font-weight:800;
+  font-size:22px;
+  line-height:1.15;
+  letter-spacing:-0.06em;
+  color:var(--ink);
+  margin-bottom:8px;
+  text-transform:uppercase;}
+.product-card .desc{
+  font-size:14px;
+  line-height:1.45;
+  color:var(--ink-2);
+  opacity:0.7;
+  margin-bottom:20px;
+  flex:1;
+}
+.product-card .price{
+  font-weight:800;
+  font-size:22px;
+  letter-spacing:-0.06em;
+  color:var(--gold);
+  text-align:left;
+  margin-top:auto;
+  text-transform:uppercase;}
+.product-card .shop{
+  margin-top:auto;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:0;
+  text-transform:uppercase;
+  color:var(--ink);
+  padding-top:4px;
+}
+.product-card .shop .arrow{display:inline-block}
+
+/* ============ TIME & PLACE ============ */
+.place{
+  background:var(--ink);
+  color:var(--bone);
+  padding:120px 60px;
+  position:relative;
+}
+.place .menu-section-num{color:var(--gold)}
+.place .menu-section-num::before{background:var(--gold)}
+
+.place-head{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;
+  margin-bottom:80px;
+}
+.place-head h2{
+  font-weight:800;
+  font-size:clamp(36px,5vw,56px);
+  line-height:0.96;
+  letter-spacing:-0.06em;
+  text-transform:uppercase;}
+.place-head h2 em{font-style:normal;color:var(--gold)}
+.place-head .intro p{
+  font-size:16px;line-height:1.5;
+  color:rgba(240,230,208,0.75);
+  max-width:420px;
+}
+
+.place-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  align-items:stretch;
+}
+
+.hours-card{
+  display:flex;flex-direction:column;
+}
+.hours-card .hd{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--bone);
+  margin-bottom:8px;
+}
+.hours-card .hd .mono-tag{color:var(--bone)}
+.hours-card .hd .mono-tag.faint{color:rgba(240,230,208,0.5)}
+.hours-table{
+  width:100%;border-collapse:collapse;margin-bottom:32px;
+}
+.hours-table tr{
+  border-bottom:1px solid rgba(240,230,208,0.14);
+  transition:background 0.3s ease;
+}
+.hours-table tr.today{
+  background:var(--bone);
+}
+.hours-table tr.today td{color:var(--ink) !important;font-weight:600}
+.hours-table tr.today td:first-child::before{
+  content:"";
+  display:none;
+}
+.hours-table td{
+  padding:18px 8px;
+  font-size:15px;
+  color:rgba(240,230,208,0.85);
+}
+.hours-table td:first-child{
+  font-weight:800;
+  font-size:22px;
+  letter-spacing:-0.06em;
+  color:var(--bone);
+  text-transform:uppercase;}
+.hours-table td:last-child{
+  text-align:right;font-size:13px;
+}
+
+.address-card{
+  background:var(--ink-2);
+  color:var(--bone);
+  padding:36px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(245,240,232,0.1);
+}
+.address-card .mono-tag{color:rgba(240,230,208,0.7);margin-bottom:14px;display:block}
+.address-card .addr{
+  font-weight:800;
+  font-size:54px;
+  line-height:0.92;
+  letter-spacing:-0.06em;
+  text-transform:uppercase;}
+.address-card .city{
+  margin-top:14px;
+  font-size:14px;
+  color:rgba(240,230,208,0.85);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+.address-card .btn{margin-top:28px;align-self:flex-start}
+
+.map-wrap{
+  position:relative;
+  height:100%;min-height:480px;
+  border:2px solid var(--bone);
+  overflow:hidden;
+  background:#0a0807;
+}
+.map-wrap iframe{
+  width:100%;height:100%;border:none;
+  filter:grayscale(1) invert(0.92) contrast(0.85) brightness(0.9) hue-rotate(8deg);
+}
+.map-pin{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-100%);
+  z-index:2;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;
+}
+.map-pin .badge{
+  background:var(--ink);color:var(--bone);
+  padding:8px 14px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  font-weight:600;
+  white-space:nowrap;
+  border:2px solid var(--ink);
+}
+.map-pin .stick{width:2px;height:24px;background:var(--ink)}
+.map-pin .pin-dot{
+  width:18px;height:18px;background:var(--ink);
+  border:2px solid var(--bone);border-radius:50%;
+  box-shadow:0 0 0 6px rgba(44,31,20,0.35);
+}
+
+/* ============ INSTAGRAM (horizontal scroll strip) ============ */
+.insta{
+  background:var(--bone);
+  padding:80px 0 80px;
+  position:relative;
+}
+.insta-eyebrow{
+  padding:0 60px;
+  margin-bottom:24px;
+  font-size:11px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--ink);
+  font-weight:700;
+}
+.insta-strip{
+  display:flex;
+  gap:1px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding:0 60px;
+  scrollbar-width:none;
+}
+.insta-strip::-webkit-scrollbar{display:none}
+.insta-strip a{
+  flex:0 0 auto;
+  height:280px;
+  scroll-snap-align:start;
+  display:block;
+}
+.insta-strip img{
+  height:100%;
+  width:auto;
+  display:block;
+  object-fit:cover;
+}
+.insta-foot{
+  padding:32px 60px 0;
+}
+.insta-foot a{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:var(--ink);
+}
+
+/* ============ SEGUINOS (social row above footer) ============ */
+.seguinos{
+  background:var(--bone);
+  color:var(--ink);
+  padding:48px 60px;
+}
+.seguinos-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:32px;
+  flex-wrap:wrap;
+  margin-bottom:40px;
+}
+.seguinos-top h2{
+  font-weight:800;
+  font-size:clamp(36px,5vw,56px);
+  line-height:0.96;
+  letter-spacing:-0.06em;
+  color:var(--ink);
+  text-transform:uppercase;
+  margin:0;
+}
+.seguinos-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:11px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--ink-2);
+  opacity:0.65;
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+.seguinos-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line-ink);
+}
+.seguinos-item{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:20px;
+  padding:36px 32px;
+  border-left:1px solid var(--line-ink);
+  color:var(--ink);
+}
+.seguinos-item:first-child{border-left:none}
+.seg-icon{
+  width:56px;
+  height:56px;
+  border:1px solid var(--line-ink);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--ink);
+}
+.seg-icon svg{
+  width:24px;
+  height:24px;
+  display:block;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.seg-meta{display:flex;flex-direction:column;gap:6px}
+.seg-label{
+  font-size:10px;
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  color:var(--ink-2);
+  opacity:0.55;
+  font-weight:600;
+}
+.seg-handle{
+  font-weight:800;
+  font-size:18px;
+  letter-spacing:-0.04em;
+  color:var(--ink);
+  line-height:1.15;
+}
+
+/* ============ WHATSAPP BANNER ============ */
+.whatsapp{
+  background:var(--bone);
+  color:var(--ink);
+  padding:100px 60px 110px;
+  position:relative;overflow:hidden;
+  border-top:1px solid var(--line-ink);
+}
+.whatsapp .sticker{
+  position:absolute;
+  right:5%;top:8%;
+  width:180px;height:180px;
+  z-index:1;
+  animation:spinSticker 18s linear infinite reverse;
+  pointer-events:none;
+}
+@keyframes spinSticker{
+  to{transform:rotate(-360deg)}
+}
+.whatsapp .sticker .disc{
+  width:100%;height:100%;
+  background:var(--ink);
+  color:var(--bone);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  font-weight:800;
+  font-size:22px;
+  letter-spacing:-0.06em;
+  line-height:0.9;
+  text-align:center;
+  text-transform:uppercase;}
+.whatsapp .sticker svg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+}
+.whatsapp .sticker text{font-size:7.2px;
+  letter-spacing:0.32em;fill:var(--bone);font-weight:600;
+}
+
+.whatsapp h2{
+  font-weight:800;
+  font-size:clamp(36px,5vw,56px);
+  line-height:1.05;
+  letter-spacing:-0.04em;
+  margin-bottom:32px;
+  max-width:24ch;
+  text-transform:uppercase;}
+.whatsapp h2 em{font-style:normal;color:var(--gold)}
+.whatsapp .btn-brick{background:var(--ink);border-color:var(--ink);color:var(--bone)}
+.whatsapp .wgrid{
+  display:grid;grid-template-columns:1.4fr 1fr;gap:80px;
+  align-items:start;
+  position:relative;z-index:2;
+}
+.whatsapp p{
+  font-size:18px;line-height:1.45;max-width:480px;
+  margin-bottom:32px;
+  color:var(--ink);
+  font-weight:500;
+}
+.whatsapp .stack{
+  display:flex;flex-direction:column;gap:20px;
+  border-left:2px solid var(--ink);
+  padding-left:32px;
+  margin-top:32px;
+}
+.whatsapp .stack .row{display:flex;flex-direction:column;gap:4px}
+.whatsapp .stack .k{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+.whatsapp .stack .v{
+  font-weight:800;font-size:22px;letter-spacing:-0.06em;
+  text-transform:uppercase;}
+
+/* ============ FOOTER ============ */
+.footer{
+  background:var(--ink);color:var(--bone);
+  padding:80px 60px 0;
+  position:relative;overflow:hidden;
+}
+.footer-main{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:60px;
+  padding-bottom:60px;
+  border-bottom:1px solid rgba(240,230,208,0.16);
+}
+.footer-col h4{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+  font-weight:600;
+  color:rgba(240,230,208,0.5);
+  margin-bottom:18px;
+}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-col a{
+  font-weight:800;
+  font-size:18px;
+  letter-spacing:-0.06em;
+  color:var(--bone);
+  text-transform:uppercase;}
+
+.footer-tag{font-size:13px;line-height:1.6;
+  color:rgba(240,230,208,0.8);
+  max-width:280px;
+}
+.footer-tag strong{
+  display:block;
+  margin-bottom:8px;
+  font-weight:800;
+  font-size:32px;
+  letter-spacing:-0.06em;
+  color:var(--bone);
+  text-transform:uppercase;}
+.footer-tag .footer-logo img{
+  display:block;
+  width:auto;
+  height:42px;
+  max-width:100%;
+}
+
+.footer-bottom{
+  padding:24px 0 32px;
+  display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(240,230,208,0.55);
+  flex-wrap:wrap;gap:16px;
+}
+.footer-bottom .social{display:flex;gap:10px}
+.footer-bottom .social a{
+  width:42px;height:42px;
+  border:1.5px solid rgba(240,230,208,0.3);
+  display:flex;align-items:center;justify-content:center;
+}
+.footer-bottom .social svg{width:18px;height:18px}
+
+/* Footer geometric mark */
+.footer-mark{
+  margin-top:80px;
+  margin-bottom:0;
+  padding-bottom:60px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.footer-mark .ring{
+  width:140px;
+  height:140px;
+  border:1.5px solid rgba(245,240,232,0.18);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  font-weight:800;
+  font-size:36px;
+  line-height:1;
+  letter-spacing:-0.06em;
+  text-transform:uppercase;}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1100px){
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .nav-top{height:76px}
+  .nav-bottom{height:42px;padding:0 16px}
+  .nav-links{gap:18px}
+  .nav-links a{font-size:10px;letter-spacing:0.18em}
+  .nav-order{display:none}
+  .nosotros{padding:0}
+  .nosotros-grid{grid-template-columns:1fr;min-height:0}
+  .nosotros-photo{height:80vw;min-height:360px}
+  .nosotros-text{padding:60px 24px}
+  .menu,.place,.insta,.seguinos,.whatsapp,.footer{padding-left:24px;padding-right:24px}
+  .insta{padding:60px 0}
+  .insta-eyebrow,.insta-foot{padding-left:24px;padding-right:24px}
+  .insta-strip{padding-left:24px;padding-right:24px}
+  .insta-strip a{height:220px}
+  .seguinos-row{grid-template-columns:repeat(2,1fr)}
+  .seguinos-item{padding:24px 16px}
+  .seguinos-item:nth-child(2){border-left:1px solid var(--line-ink)}
+  .seguinos-item:nth-child(3),.seguinos-item:nth-child(4){border-top:1px solid var(--line-ink)}
+  .seguinos-item:nth-child(3){border-left:none}
+  .hero{grid-template-columns:1fr;height:auto;min-height:100vh}
+  .hero-left{padding:120px 24px 80px}
+  .hero-right{height:60vw;min-height:320px}
+  .menu-head,.place-head{grid-template-columns:1fr;gap:32px}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .place-grid{grid-template-columns:1fr}
+  .map-wrap{min-height:360px}
+  .address-card .addr{font-size:38px}
+  .seguinos{padding:36px 24px}
+  .seguinos-top{margin-bottom:24px}
+  .whatsapp{padding:80px 24px 90px}
+  .whatsapp .wgrid{grid-template-columns:1fr;gap:32px}
+  .whatsapp .stack{border-left:none;border-top:2px solid var(--ink);padding-left:0;padding-top:24px;margin-top:0}
+  .whatsapp .sticker{width:120px;height:120px;right:5%;top:auto;bottom:5%}
+  .footer-main{grid-template-columns:1fr;gap:32px}
+}
+@media (max-width:600px){
+  .product-grid{grid-template-columns:1fr}
+  .ribbon-track{font-size:24px}
+  .place-head h2{font-size:clamp(36px,9vw,56px)}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav" data-screen-label="00 Nav">
+  <div class="nav-top">
+    <a href="#" class="logo" aria-label="Ona">
+      <img src="assets/logo.svg" alt="Ona">
+    </a>
+  </div>
+  <div class="nav-bottom">
+    <ul class="nav-links">
+      <li><a href="#menu">Productos</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#ubicacion">Ubicación</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" data-screen-label="01 Hero">
+  <div class="hero-left">
+    <h2>Lo que hacemos,<br>lo hacemos <em>bien.</em></h2>
+    <p>Abrimos todos los días. Café de especialidad, panadería del día y carta de temporada.</p>
+    <div class="hero-cta-row">
+      <a href="#contacto" class="btn btn-brick">Contacto <span class="arrow">→</span></a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="assets/hero.png" alt="">
+  </div>
+</section>
+
+<!-- ============ RIBBON DIVIDER ============ -->
+<div class="ribbon" aria-hidden="true">
+  <div class="ribbon-track">
+    <span>Horno a leña <span class="star">●</span> Leche orgánica <span class="star">●</span> Tostado claro <span class="star">●</span> Buenos Aires <span class="star">●</span></span>
+    <span>Horno a leña <span class="star">●</span> Leche orgánica <span class="star">●</span> Tostado claro <span class="star">●</span> Buenos Aires <span class="star">●</span></span>
+  </div>
+</div>
+
+<!-- ============ NOSOTROS ============ -->
+<section class="nosotros" id="nosotros" data-screen-label="02 Nosotros">
+  <div class="nosotros-grid">
+    <div class="nosotros-photo">
+      <img src="assets/nosotros.jpg" alt="Martina y Diego, fundadores de Ricco">
+    </div>
+    <div class="nosotros-text">
+      <div class="menu-section-num">N.º 002 / Quiénes somos</div>
+      <h2>Quiénes somos.</h2>
+      <p>Ricco nació en 2019 en la cocina de un departamento en Recoleta. Somos Martina y Diego, una pareja que comparte una obsesión: el café bueno y la pastelería honesta.</p>
+      <p>Empezamos horneando para amigos. Hoy tenemos un local, pero el horno sigue siendo el mismo — y la obsesión, también.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section class="menu" id="menu" data-screen-label="02 Menu">
+  <div class="menu-section-num">N.º 003 / Nuestros productos</div>
+  <div class="menu-head">
+    <h2>Nuestros productos.</h2>
+  </div>
+
+  <div class="product-grid">
+    <article class="product-card">
+      <div class="img" style="background-image:url('assets/product-mailer.png')"></div>
+      <h3 class="name">Eclipse Arabica</h3>
+      <p class="desc">Grano entero 250g. Origen único, tostado claro. Para moler en casa.</p>
+      <a href="#" class="shop">Consultar <span class="arrow">→</span></a>
+    </article>
+
+    <article class="product-card">
+      <div class="img" style="background-image:url('assets/product-icedbox.png')"></div>
+      <h3 class="name">Noir Espresso</h3>
+      <p class="desc">Lata 355ml. Espresso frío, sin azúcar. Listo para llevar.</p>
+      <a href="#" class="shop">Consultar <span class="arrow">→</span></a>
+    </article>
+
+    <article class="product-card">
+      <div class="img" style="background-image:url('assets/product-noir.png')"></div>
+      <h3 class="name">Iced Coffee Box</h3>
+      <p class="desc">Pack x6. Seis latas, una caja. Para stockearte o regalar.</p>
+      <a href="#" class="shop">Consultar <span class="arrow">→</span></a>
+    </article>
+
+    <article class="product-card">
+      <div class="img" style="background-image:url('assets/product-eclipse.png')"></div>
+      <h3 class="name">Ricco Mailer Box</h3>
+      <p class="desc">Edición especial. La experiencia Ricco completa, lista para regalar.</p>
+      <a href="#" class="shop">Consultar <span class="arrow">→</span></a>
+    </article>
+  </div>
+</section>
+
+<!-- ============ TIME & PLACE ============ -->
+<section class="place" id="ubicacion" data-screen-label="03 Place">
+  <div class="menu-section-num">N.º 003 / Tiempo y lugar</div>
+  <div class="place-head">
+    <h2>Encontranos.<br>Siempre hay una mesa para vos.</h2>
+  </div>
+
+  <div class="place-grid">
+    <!-- Hours -->
+    <div class="hours-card">
+      <div class="hd">
+        <span class="mono-tag">Horarios</span>
+      </div>
+      <table class="hours-table" id="hoursTable">
+        <tr data-day="1"><td>Lunes</td><td>07:30 — 19:00</td></tr>
+        <tr data-day="2"><td>Martes</td><td>07:30 — 19:00</td></tr>
+        <tr data-day="3"><td>Miércoles</td><td>07:30 — 19:00</td></tr>
+        <tr data-day="4"><td>Jueves</td><td>07:30 — 20:00</td></tr>
+        <tr data-day="5"><td>Viernes</td><td>07:30 — 20:00</td></tr>
+        <tr data-day="6"><td>Sábado</td><td>08:30 — 20:00</td></tr>
+        <tr data-day="0"><td>Domingo</td><td>09:00 — 17:00</td></tr>
+      </table>
+
+      <div class="address-card">
+        <div>
+          <span class="mono-tag">Dirección</span>
+          <div class="addr">Av. Santa<br>Fe 1800.</div>
+          <div class="city">Recoleta · CABA · Argentina</div>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Santa+Fe+1800,+Buenos+Aires" target="_blank" rel="noopener" class="btn btn-bone">
+          Cómo llegar <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-wrap">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.3231404179114!2d-58.395650223794505!3d-34.595989457090994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccabe0b261b35%3A0xaeab147014e45c49!2sAv.%20Sta.%20Fe%201800%2C%20C1122%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1sen!2sar!4v1779634945172!5m2!1sen!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="map-pin">
+        <div class="badge">Ona · Recoleta</div>
+        <div class="stick"></div>
+        <div class="pin-dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section class="insta" data-screen-label="04 Instagram">
+  <div class="insta-eyebrow">@riccocoffee</div>
+
+  <div class="insta-strip">
+    <a href="https://instagram.com/riccocoffee" target="_blank" rel="noopener">
+      <img src="https://unsplash.com/photos/H5ZSvpMs1M8/download?w=1200" alt="Foto de Instagram" loading="lazy">
+    </a>
+    <a href="https://instagram.com/riccocoffee" target="_blank" rel="noopener">
+      <img src="https://unsplash.com/photos/t7jTtJ9iyUE/download?w=1200" alt="Foto de Instagram" loading="lazy">
+    </a>
+    <a href="https://instagram.com/riccocoffee" target="_blank" rel="noopener">
+      <img src="https://unsplash.com/photos/69ilqMz0p1s/download?w=1200" alt="Foto de Instagram" loading="lazy">
+    </a>
+    <a href="https://instagram.com/riccocoffee" target="_blank" rel="noopener">
+      <img src="https://unsplash.com/photos/kzvxBhAx6Kw/download?w=1200" alt="Foto de Instagram" loading="lazy">
+    </a>
+    <a href="https://instagram.com/riccocoffee" target="_blank" rel="noopener">
+      <img src="https://unsplash.com/photos/QnUywvDdI1o/download?w=1200" alt="Foto de Instagram" loading="lazy">
+    </a>
+    <a href="https://instagram.com/riccocoffee" target="_blank" rel="noopener">
+      <img src="https://unsplash.com/photos/8BilbJReBqc/download?w=1200" alt="Foto de Instagram" loading="lazy">
+    </a>
+  </div>
+
+  <div class="insta-foot">
+    <a href="https://instagram.com/riccocoffee" target="_blank" rel="noopener">Seguinos en Instagram <span>→</span></a>
+  </div>
+</section>
+
+<!-- ============ WHATSAPP BANNER ============ -->
+<section class="whatsapp" data-screen-label="04 WhatsApp">
+
+  <div class="menu-section-num" style="color:var(--ink);margin-bottom:32px">N.º 005 / Pedido directo</div>
+  <h2>¿Querés un <em>pedido</em><br>o una <em>reserva?</em></h2>
+
+  <div class="wgrid">
+    <div>
+      <p>Escribinos directo por WhatsApp. Te tomamos el pedido para retiro, te reservamos mesa, o te avisamos cuando llegan los granos nuevos. Respondemos rápido — generalmente en minutos.</p>
+      <a href="https://wa.me/5491100000000?text=Hola!%20Quiero%20hacer%20un%20pedido." target="_blank" rel="noopener" class="btn btn-brick">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4l-2.4-1.1c-.4-.2-.9 0-1.1.3l-.6.7c-.2.2-.5.3-.8.2-1.2-.5-2.2-1.5-2.7-2.7-.1-.3 0-.6.2-.8l.7-.6c.3-.3.4-.7.3-1.1L9.6 6.5c-.2-.5-.7-.8-1.2-.7l-2 .6c-.5.1-.8.6-.8 1.1 0 5 4 9 9 9 .5 0 1-.3 1.1-.8l.6-2c.1-.5-.1-1.1-.6-1.3zM12 2A10 10 0 002 12c0 1.7.5 3.4 1.3 4.9L2 22l5.1-1.3A10 10 0 0022 12 10 10 0 0012 2z"/></svg>
+        Abrir WhatsApp <span class="arrow">→</span>
+      </a>
+    </div>
+    <div class="stack">
+      <div class="row"><span class="k">Línea directa</span><span class="v">+54 9 11 0000 0000</span></div>
+      <div class="row"><span class="k">Respuesta</span><span class="v">Lun a Dom · 8 a 19h</span></div>
+      <div class="row"><span class="k">También</span><span class="v">hola@riccocoffee.com</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEGUINOS (social row) ============ -->
+<section class="seguinos" id="contacto" data-screen-label="05 Seguinos">
+  <div class="seguinos-top">
+    <h2>En todos lados.</h2>
+    <a href="https://instagram.com/riccocoffee" target="_blank" rel="noopener" class="seguinos-link">Seguinos en Instagram <span class="arrow">→</span></a>
+  </div>
+
+  <div class="seguinos-row">
+    <a class="seguinos-item" href="https://instagram.com/riccocoffee" target="_blank" rel="noopener">
+      <div class="seg-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <div class="seg-meta">
+        <span class="seg-label">Instagram</span>
+        <span class="seg-handle">@riccocoffee</span>
+      </div>
+    </a>
+
+    <a class="seguinos-item" href="https://wa.me/5491100000000" target="_blank" rel="noopener">
+      <div class="seg-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/><path d="M8.5 9.5c.5 1 1.5 2.5 3 3.5s2.5 1 3 1"/></svg>
+      </div>
+      <div class="seg-meta">
+        <span class="seg-label">WhatsApp</span>
+        <span class="seg-handle">+54 9 11 0000 0000</span>
+      </div>
+    </a>
+
+    <a class="seguinos-item" href="https://tiktok.com/@riccocoffee" target="_blank" rel="noopener">
+      <div class="seg-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.4 4.6 5 5"/></svg>
+      </div>
+      <div class="seg-meta">
+        <span class="seg-label">TikTok</span>
+        <span class="seg-handle">@riccocoffee</span>
+      </div>
+    </a>
+
+    <a class="seguinos-item" href="https://facebook.com/riccocoffee" target="_blank" rel="noopener">
+      <div class="seg-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M14 21v-8h2.6l.4-3H14V8.2c0-.9.3-1.5 1.5-1.5H17V4.1c-.3 0-1.2-.1-2.3-.1-2.3 0-3.7 1.3-3.7 3.8V10H8.5v3H11v8Z"/></svg>
+      </div>
+      <div class="seg-meta">
+        <span class="seg-label">Facebook</span>
+        <span class="seg-handle">/riccocoffee</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" data-screen-label="06 Footer">
+  <div class="footer-main">
+    <div class="footer-tag">
+      <strong class="footer-logo"><img src="assets/ricco.svg" alt="Ricco"></strong>
+      Café de especialidad en Buenos Aires. Tostamos los lunes, abrimos los martes, descansamos los miércoles solo si el horno se lo merece.
+    </div>
+    <div class="footer-col">
+      <h4>Navegar</h4>
+      <ul>
+        <li><a href="#menu">Productos</a></li>
+        <li><a href="#ubicacion">Ubicación</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="mailto:hola@riccocoffee.com">hola@riccocoffee.com</a></li>
+        <li><a href="https://wa.me/5491100000000" target="_blank" rel="noopener">+54 9 11 0000 0000</a></li>
+        <li><a href="https://maps.google.com/?q=Av.+Santa+Fe+1800" target="_blank" rel="noopener">Av. Santa Fe 1800</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>© 2026 Ona. Todos los derechos reservados.</div>
+    <div>Hecho con ♥ en Buenos Aires</div>
+  </div>
+
+</footer>
+
+<script>
+// Highlight today's hours
+const today = new Date().getDay();
+const row = document.querySelector(`#hoursTable tr[data-day="${today}"]`);
+if(row) row.classList.add('today');
+</script>
+
+</body>
+</html>
